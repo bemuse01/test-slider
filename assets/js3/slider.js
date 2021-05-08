@@ -6,8 +6,8 @@ class Slider{
         this.parent = parent
         this.index = index
 
-        this.playHide = true
-        this.playShow = true
+        this.playHide = false
+        this.playShow = false
 
         this.init()
     }
@@ -20,6 +20,8 @@ class Slider{
             // this.setDisplayNone()
             this.el.style.transform = 'translate(100%, 0)'
         }
+
+        this.el.addEventListener('transitionend', () => this.afterHide(), false)
     }
 
 
@@ -30,7 +32,6 @@ class Slider{
         this.el.style.transition = 'transform 0.4s'
         this.el.style.transform = 'translate(-100%, 0)'
 
-        this.el.addEventListener('transitionend', () => this.afterHide(), false)
     }
     show(){
         this.el.style.transition = 'transform 0.4s'

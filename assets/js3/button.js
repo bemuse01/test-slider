@@ -20,6 +20,8 @@ class Button{
     // event
     click(key){
         this.key = parseInt(key)
+
+        this.play()
     }
     change(i){
         if(this.index == i) {
@@ -30,6 +32,15 @@ class Button{
             this.checked = false
         }
     }
+    play(){
+        const first = slider[mark]
+        const second = slider[this.key]
 
+        first.hide()
+        second.show()
 
+        for(const but of button) but.change(this.key)
+
+        mark = this.key
+    }
 }

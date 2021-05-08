@@ -1,22 +1,3 @@
-// slider
-const playSlider = () => {
-    const first = slider[mark]
-    const second = slider.find(e => e.el === first.next)
-
-    first.hide()
-    second.show()
-
-    mark = (mark + 1) % slider.length
-}
-const setSlider = () => {
-    const parent = document.querySelector('.slider-container')
-    const el = document.querySelectorAll('.slider')
-
-    el.forEach((e, i) => slider.push(new Slider(e, parent, i)))
-}
-
-
-
 // button
 const setButton = () => {
     const el = document.querySelectorAll('.button')
@@ -34,7 +15,57 @@ const onClickButton = (event) => {
 
     if(button[key].checked) return
 
-    // button[key].click(key)
+    oldTime = window.performance.now()
+    currentTime = window.performance.now()
+
+    button[key].click(key)
+}
+
+
+
+// slider
+const playSlider = () => {
+    const first = slider[mark]
+    const second = slider.find(e => e.el === first.next)
+
+    first.hide()
+    second.show()
+
+    changeButton(second.index)
+
+    mark = (mark + 1) % slider.length
+}
+const playSlider2 = () => {
+    currentTime = window.performance.now()
+    
+    if(currentTime - oldTime > delay){
+        const first = slider[mark]
+        const second = slider.find(e => e.el === first.next)
+    
+        first.hide()
+        second.show()
+    
+        changeButton(second.index)
+    
+        mark = (mark + 1) % slider.length
+
+        oldTime = currentTime
+    }
+}
+const setSlider = () => {
+    const parent = document.querySelector('.slider-container')
+    const el = document.querySelectorAll('.slider')
+
+    el.forEach((e, i) => slider.push(new Slider(e, parent, i)))
+}
+
+
+
+// animate
+const animate = () => {
+    playSlider2()
+
+    requestAnimationFrame(animate)
 }
 
 
@@ -44,7 +75,8 @@ const init = () => {
     setSlider()
     setButton()
 
-    setInterval(() => playSlider(), 3000)
+    // setInterval(() => playSlider(), delay)
+    animate()
 
     for(const but of button) but.el.addEventListener('click', (e) => onClickButton(e), false)
 }
