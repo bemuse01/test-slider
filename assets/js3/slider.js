@@ -6,6 +6,7 @@ class Slider{
         this.parent = parent
         this.index = index
 
+        this.transitionTime = 0.3
         this.playHide = false
         this.playShow = false
 
@@ -15,7 +16,7 @@ class Slider{
 
     // init
     init(){
-        this.el.style.transition = 'transform 0.4s'
+        this.el.style.transition = `transform ${this.transitionTime}s`
         if(this.index !== 0) {
             // this.setDisplayNone()
             this.el.style.transform = 'translate(100%, 0)'
@@ -29,12 +30,12 @@ class Slider{
     hide(){
         this.playHide = true
 
-        this.el.style.transition = 'transform 0.4s'
+        this.el.style.transition = `transform ${this.transitionTime}s`
         this.el.style.transform = 'translate(-100%, 0)'
 
     }
     show(){
-        this.el.style.transition = 'transform 0.4s'
+        this.el.style.transition = `transform ${this.transitionTime}s`
         this.el.style.transform = 'translate(0, 0)'
     }
 
@@ -55,6 +56,8 @@ class Slider{
 
         this.el.style.transition = 'transform 0s'
         this.el.style.transform = 'translate(100%, 0)'
+
+        clickEable = true
 
         this.playHide = false
     }

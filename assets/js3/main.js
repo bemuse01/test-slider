@@ -13,8 +13,10 @@ const onClickButton = (event) => {
     const target = event.target
     const key = target.getAttribute('key')
 
+    if(!clickEable) return
     if(button[key].checked) return
 
+    clickEable = false
     oldTime = window.performance.now()
     currentTime = window.performance.now()
 
